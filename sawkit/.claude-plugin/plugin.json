@@ -1,0 +1,9 @@
+{
+  "name": "sawkit",
+  "version": "0.1.0",
+  "description": "Generic reusable skills for markdown authoring, diagram generation, and project structure",
+  "author": {
+    "name": "geeksaw"
+  },
+  "repository": "https://github.com/geeksaw/sawkit"
+}
