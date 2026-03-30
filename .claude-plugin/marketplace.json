@@ -1,0 +1,21 @@
+{
+  "name": "Maskar",
+  "owner": {
+    "name": "Maskar"
+  },
+  "metadata": {
+    "description": "Generic reusable skills and extensions for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "sawkit",
+      "source": "./sawkit",
+      "description": "Markdown authoring, diagram generation, and project structure skills",
+      "version": "0.1.0",
+      "author": {
+        "name": "Maskar"
+      },
+      "keywords": ["markdown", "diagrams", "project-structure", "toolkit"]
+    }
+  ]
+}

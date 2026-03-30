@@ -12,17 +12,29 @@ Generic reusable skills for Claude Code — markdown authoring, diagram generati
 
 ## Installation
 
-```bash
-claude plugins add /path/to/sawkit
+### From GitHub
+
+Inside a Claude Code session:
+
+```text
+/plugin marketplace add Maskar/cc-plugins
+/plugin install sawkit@Maskar
 ```
 
-Or for development:
+### From local path
+
+```text
+/plugin marketplace add /path/to/cc-plugins
+/plugin install sawkit@Maskar
+```
+
+### Development (single session)
 
 ```bash
 claude --plugin-dir /path/to/sawkit
 ```
 
-## Skills
+## Skill Details
 
 ### md-expert
 
