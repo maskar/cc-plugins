@@ -17,15 +17,15 @@ Generic reusable skills for Claude Code — markdown authoring, diagram generati
 Inside a Claude Code session:
 
 ```text
-/plugin marketplace add Maskar/cc-plugins
-/plugin install sawkit@Maskar
+/plugin marketplace add maskar/cc-plugins
+/plugin install sawkit@maskar
 ```
 
 ### From local path
 
 ```text
 /plugin marketplace add /path/to/cc-plugins
-/plugin install sawkit@Maskar
+/plugin install sawkit@maskar
 ```
 
 ### Development (single session)

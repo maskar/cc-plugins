@@ -1,7 +1,7 @@
 {
-  "name": "Maskar",
+  "name": "maskar",
   "owner": {
-    "name": "Maskar"
+    "name": "maskar"
   },
   "metadata": {
     "description": "Generic reusable skills and extensions for Claude Code"
@@ -13,7 +13,7 @@
       "description": "Markdown authoring, diagram generation, and project structure skills",
       "version": "0.1.0",
       "author": {
-        "name": "Maskar"
+        "name": "maskar"
       },
       "keywords": ["markdown", "diagrams", "project-structure", "toolkit"]
     }

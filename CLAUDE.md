@@ -30,8 +30,8 @@ cc-plugins/
 ## Marketplace Usage
 
 ```text
-/plugin marketplace add Maskar/cc-plugins
-/plugin install <plugin-name>@Maskar
+/plugin marketplace add maskar/cc-plugins
+/plugin install <plugin-name>@maskar
 ```
 
 ## Conventions

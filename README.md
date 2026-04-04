@@ -1,6 +1,6 @@
 # cc-plugins
 
-Claude Code plugin marketplace by [Maskar](https://github.com/Maskar). A collection of generic, reusable skills and extensions.
+Claude Code plugin marketplace by [maskar](https://github.com/maskar). A collection of generic, reusable skills and extensions.
 
 ## Plugins
 
@@ -15,13 +15,13 @@ Claude Code plugin marketplace by [Maskar](https://github.com/Maskar). A collect
 Inside a Claude Code session, register this repository as a plugin marketplace:
 
 ```text
-/plugin marketplace add Maskar/cc-plugins
+/plugin marketplace add maskar/cc-plugins
 ```
 
 ### 2. Install a plugin
 
 ```text
-/plugin install sawkit@Maskar
+/plugin install sawkit@maskar
 ```
 
 ### Local development

@@ -45,6 +45,16 @@ TIERS = {
         "max_nodes": 20,
     },
     5: {
+        "name": "Native SVG (Python)",
+        "keywords": [
+            "layered", "layers", "architecture", "precise", "layout",
+            "horizontal", "side-by-side", "stacked", "exact",
+            "module map", "system overview", "native svg",
+            "mermaid broken", "mermaid fails", "pixel",
+        ],
+        "max_nodes": 30,
+    },
+    6: {
         "name": "PlantUML",
         "keywords": [
             "aws", "azure", "kubernetes", "k8s", "uml", "deployment",
@@ -53,7 +63,7 @@ TIERS = {
         ],
         "max_nodes": 30,
     },
-    6: {
+    7: {
         "name": "Graphviz/D2",
         "keywords": [
             "large", "dependency", "call graph", "complex", "50+",
@@ -62,7 +72,7 @@ TIERS = {
         ],
         "max_nodes": 500,
     },
-    7: {
+    8: {
         "name": "Vega-Lite",
         "keywords": [
             "chart", "bar", "line", "scatter", "heatmap", "histogram",
@@ -71,7 +81,7 @@ TIERS = {
         ],
         "max_nodes": 0,
     },
-    8: {
+    9: {
         "name": "Kroki",
         "keywords": [
             "bytefield", "protocol", "wavedrom", "timing", "dbml",
@@ -112,7 +122,34 @@ flowchart TD
     C --> E[End]
     D --> E
 ```""",
-    5: """```plantuml
+    5: """Write a Python script that generates native SVG:
+
+```python
+#!/usr/bin/env python3
+from pathlib import Path
+elements = []
+
+def esc(s):
+    return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+def rect(x, y, w, h, fill, stroke, rx=10):
+    elements.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{rx}" fill="{fill}" stroke="{stroke}" stroke-width="1.5"/>')
+
+def text(x, y, label, size=13, bold=False, color="#1e1e1e"):
+    wt = "bold" if bold else "normal"
+    elements.append(f'<text x="{x}" y="{y}" font-family="Helvetica,Arial,sans-serif" font-size="{size}" font-weight="{wt}" fill="{color}" text-anchor="middle" dominant-baseline="middle">{esc(label)}</text>')
+
+# Add layers: rect() for containers, text() for labels
+# See native-svg-guide.md for the full layered template
+
+W, H = 1100, 400
+svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"><rect width="{W}" height="{H}" fill="#fff"/>{"".join(elements)}</svg>'
+out = Path(__file__).parent / "diagram.svg"
+out.write_text(svg)
+```
+
+Run: `python3 docs/diagrams/gen-diagram.py`""",
+    6: """```plantuml
 @startuml
 !include <awslib/AWSCommon>
 !include <awslib/Compute/EC2>
@@ -126,7 +163,7 @@ web --> db
 ```
 
 Render: `plantuml -tsvg input.puml`""",
-    6: """```dot
+    7: """```dot
 digraph G {
     rankdir=LR
     node [shape=box, style=rounded]
@@ -137,7 +174,7 @@ digraph G {
 ```
 
 Render: `dot -Tsvg input.dot -o output.svg`""",
-    7: """{
+    8: """{
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "data": {"values": [{"x": "A", "y": 28}, {"x": "B", "y": 55}]},
   "mark": "bar",
@@ -148,7 +185,7 @@ Render: `dot -Tsvg input.dot -o output.svg`""",
 }
 
 Render: `vl2svg -i spec.vl.json -o chart.svg`""",
-    8: """Use Kroki with the appropriate diagram type:
+    9: """Use Kroki with the appropriate diagram type:
 
 ```bash
 kroki convert input.ext -t svg -o output.svg

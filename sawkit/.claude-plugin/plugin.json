@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Generic reusable skills for markdown authoring, diagram generation, and project structure",
   "author": {
-    "name": "Maskar"
+    "name": "maskar"
   },
-  "repository": "https://github.com/Maskar/cc-plugins"
+  "repository": "https://github.com/maskar/cc-plugins"
 }
