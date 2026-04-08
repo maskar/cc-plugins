@@ -461,8 +461,9 @@ Use `legend()` to add a color key to any diagram:
 ```python
 legend(x=total_w - 180, y=10, items=[
     ("Production", "#b2f2bb", "#2f9e44"),
-    ("In Progress", "#dbe4ff", "#4263eb"),
-    ("Not Started", "#e7f5ff", "#1971c2"),
+    ("Partial", "#dbe4ff", "#4263eb"),
+    ("Skeletal", "#fff3bf", "#e8590c"),
+    ("Not Started", "#f1f3f5", "#868e96"),
 ], title="Status")
 ```
 
@@ -525,9 +526,11 @@ For diagrams that show module maturity or build progress, use colors from **diff
 | Production  | `#b2f2bb` | `#2f9e44` | Green      |
 | Partial     | `#dbe4ff` | `#4263eb` | Indigo     |
 | Skeletal    | `#fff3bf` | `#e8590c` | Yellow     |
-| Not started | `#e7f5ff` | `#1971c2` | Blue       |
+| Not started | `#f1f3f5` | `#868e96` | Gray       |
 
-**Why indigo for Partial?** Teal (`#c3fae8`) and cyan (`#c5f6fa`) both blend with green on screen and in print. Indigo (`#dbe4ff`) is purple-tinted, clearly distinct from green, yellow, and blue.
+**Why indigo for Partial?** Teal (`#c3fae8`) and cyan (`#c5f6fa`) both blend with green on screen and in print. Indigo (`#dbe4ff`) is purple-tinted, clearly distinct from green and yellow.
+
+**Why gray for Not Started?** Light blue (`#e7f5ff`) is too close to indigo (`#dbe4ff`) — both are in the blue family. Gray conveys "absence of work" and is visually distinct from all three active-status colors.
 
 ### General Purpose
 
