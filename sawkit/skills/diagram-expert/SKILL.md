@@ -90,6 +90,30 @@ For the full decision matrix with complexity thresholds and examples, read `${CL
 9. **Charting data (numbers, trends)?** → Tier 8: Vega-Lite
 10. **Specialized format (timing, protocol, etc.)?** → Tier 9: Kroki
 
+## Choosing the Right Mermaid Diagram Type
+
+When Tier 3 (Mermaid fenced blocks) is selected, pick the diagram type that best fits the content:
+
+| Content                              | Diagram Type     | Example                              |
+|--------------------------------------|------------------|--------------------------------------|
+| Steps, decisions, workflows          | `flowchart`      | Login flow, CI/CD pipeline           |
+| API calls, request/response          | `sequenceDiagram`| Auth handshake, webhook flow         |
+| Lifecycle, transitions               | `stateDiagram-v2`| Order status, connection states      |
+| Tables, foreign keys                 | `erDiagram`      | Database schema                      |
+| Inheritance, composition             | `classDiagram`   | OOP design, type hierarchy           |
+| Layered architecture (grid)          | `block-beta`     | System layers, service groups        |
+| Software architecture (C4)           | `C4Context`      | Context/container/component views    |
+| Brainstorming, topic breakdown       | `mindmap`        | Feature planning, concept map        |
+| Project schedule, phases             | `gantt`          | Sprint timeline, release plan        |
+| Proportions, distribution            | `pie`            | Budget split, error breakdown        |
+| Branching strategy, merge history    | `gitgraph`       | Git flow, release branches           |
+| Events over time                     | `timeline`       | Project milestones, incident history |
+| 2x2 analysis, priority/effort       | `quadrantChart`  | Feature prioritization               |
+| Trend data, bar/line charts          | `xychart-beta`   | Revenue over time, metrics           |
+| Flow quantities between nodes        | `sankey-beta`    | Budget flow, data pipeline volumes   |
+
+For syntax details of each type, read `${CLAUDE_PLUGIN_ROOT}/skills/diagram-expert/references/mermaid-guide.md`.
+
 ## Generating ASCII Diagrams
 
 ### Tier 1: Hand-crafted Unicode
@@ -268,6 +292,7 @@ print(f"Generated: {out}")
 - Use `text-anchor="middle"` + `dominant-baseline="middle"` for centered text
 - Validate output: `python3 -c "import xml.etree.ElementTree as ET; ET.parse('diagram.svg'); print('Valid')`
 - Keep the generator script next to the SVG so it can be re-run
+- For **dependency/relationship diagrams**: connect arrows to box side centers (not corners), route cross-row arrows through gutters via VHV elbows, stagger overlapping paths, and export to PNG to verify visually. See the full guide for routing rules.
 
 For the full reference with color palettes and layout patterns, read `${CLAUDE_PLUGIN_ROOT}/skills/diagram-expert/references/native-svg-guide.md`.
 

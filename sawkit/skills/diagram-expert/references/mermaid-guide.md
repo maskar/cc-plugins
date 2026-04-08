@@ -226,3 +226,214 @@ pie title Distribution
     "Category B" : 30
     "Category C" : 25
 ```
+
+## C4 Diagram
+
+Model software architecture using the C4 standard (Context, Container, Component):
+
+```mermaid
+C4Context
+    title System Context Diagram
+
+    Person(user, "User", "A customer of the system")
+    System(webapp, "Web Application", "Delivers the web frontend")
+    System_Ext(email, "Email System", "Sends emails")
+    SystemDb(db, "Database", "Stores user data")
+
+    Rel(user, webapp, "Uses", "HTTPS")
+    Rel(webapp, email, "Sends emails", "SMTP")
+    Rel(webapp, db, "Reads/writes", "SQL")
+```
+
+**C4 diagram types:** `C4Context`, `C4Container`, `C4Component`, `C4Deployment`
+
+**C4 elements:**
+
+| Function         | Description              |
+|------------------|--------------------------|
+| `Person`         | Human user               |
+| `System`         | Internal system          |
+| `System_Ext`     | External system          |
+| `SystemDb`       | Database system          |
+| `Container`      | App/service in a system  |
+| `Component`      | Component in a container |
+| `Rel`            | Relationship             |
+| `Boundary`       | Grouping boundary        |
+
+## Git Graph
+
+Visualize branching strategies and merge history:
+
+```mermaid
+gitgraph
+    commit
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+    branch feature
+    checkout feature
+    commit
+    checkout develop
+    merge feature
+    checkout main
+    merge develop
+```
+
+**Options:** `commit id:"msg"`, `commit tag:"v1.0"`, `commit type: HIGHLIGHT`
+
+**Commit types:** `NORMAL`, `REVERSE`, `HIGHLIGHT`
+
+## Timeline
+
+Show events along a time axis:
+
+```mermaid
+timeline
+    title Project Milestones
+    section Q1
+        January : Design phase
+                : Requirements gathered
+        March : Prototype complete
+    section Q2
+        April : Alpha release
+        June : Beta release
+    section Q3
+        July : GA release
+```
+
+## Quadrant Chart
+
+Priority/effort matrices and 2x2 analysis:
+
+```mermaid
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+```
+
+## XY Chart
+
+Data visualization with bar and line marks:
+
+```mermaid
+xychart-beta
+    title "Revenue vs Expenses"
+    x-axis [Jan, Feb, Mar, Apr, May, Jun]
+    y-axis "Amount (USD)" 0 --> 10000
+    bar [5000, 6000, 7500, 8200, 9500, 10500]
+    line [4200, 5300, 6100, 7400, 8100, 9200]
+```
+
+## Sankey Diagram
+
+Visualize flow quantities between nodes:
+
+```mermaid
+sankey-beta
+    Source A,Target X,5
+    Source A,Target Y,3
+    Source B,Target X,2
+    Source B,Target Z,4
+    Target X,Final,7
+    Target Y,Final,3
+```
+
+Format: `source,target,value` — one flow per line. Useful for budget flows, data pipelines, energy diagrams.
+
+## Subgraphs and Nesting
+
+Group nodes into named containers:
+
+```mermaid
+flowchart TD
+    subgraph Frontend["Frontend Layer"]
+        direction LR
+        A[React App] --> B[Router]
+    end
+
+    subgraph Backend["Backend Layer"]
+        direction LR
+        C[API Server] --> D[Auth]
+        C --> E[Workers]
+    end
+
+    subgraph Data["Data Layer"]
+        F[(PostgreSQL)]
+        G[(Redis)]
+    end
+
+    Frontend --> Backend
+    Backend --> Data
+
+    style Frontend fill:#e7f5ff,stroke:#1971c2
+    style Backend fill:#d8f5e0,stroke:#2f9e44
+    style Data fill:#f8f9fa,stroke:#495057
+```
+
+**Notes:**
+- `direction` inside subgraphs works in `flowchart` but can be unreliable — test first
+- Subgraph-to-subgraph edges (e.g., `Frontend --> Backend`) work and are cleaner than individual node edges
+- Style subgraphs with `style SubgraphId fill:...,stroke:...`
+
+## Theming and Init Directives
+
+Control diagram appearance with `init` frontmatter:
+
+```mermaid
+---
+config:
+  theme: neutral
+  themeVariables:
+    primaryColor: "#d0ebff"
+    primaryTextColor: "#1e1e1e"
+    primaryBorderColor: "#1971c2"
+    lineColor: "#868e96"
+    secondaryColor: "#d8f5e0"
+    tertiaryColor: "#f3f0ff"
+    fontSize: "14px"
+---
+flowchart TD
+    A[Start] --> B[End]
+```
+
+**Built-in themes:** `default`, `neutral`, `dark`, `forest`, `base`
+
+**Key theme variables:**
+
+| Variable              | Controls                        |
+|-----------------------|---------------------------------|
+| `primaryColor`        | Main node fill                  |
+| `primaryTextColor`    | Main node text                  |
+| `primaryBorderColor`  | Main node border                |
+| `lineColor`           | Arrows and edges                |
+| `secondaryColor`      | Secondary node fill             |
+| `tertiaryColor`       | Tertiary node fill              |
+| `fontSize`            | Global font size                |
+| `fontFamily`          | Global font (quote if spaces)   |
+
+## Common Pitfalls
+
+1. **Special characters in labels** — Wrap in quotes: `A["Node with (parens)"]`. Unquoted parens/brackets break parsing.
+2. **`direction LR` inside subgraphs** — Unreliable in `flowchart`. Use `block-beta` for grid layouts instead.
+3. **Dark mode text** — Always pin `color:` when overriding `fill:`. See Dark Mode Safety above.
+4. **Long labels truncate** — Mermaid clips text that overflows node boxes. Keep labels concise or use `<br/>` for line breaks: `A["Line one<br/>Line two"]`.
+5. **Mermaid Chart MCP adds `<style>` tags** — The MCP tool may prepend CSS before `<svg>`. Strip the `<style>...</style>` block before using the raw SVG.
+6. **Node ID collisions** — IDs like `end`, `start`, `class`, `style` are reserved words. Prefix them: `nodeEnd`, `stepStart`.
+7. **Colon in labels** — Colons can be misinterpreted. Use quotes: `A["Key: Value"]`.
+8. **Empty subgraphs** — A subgraph with no nodes causes a parse error. Always include at least one node.

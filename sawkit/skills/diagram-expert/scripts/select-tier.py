@@ -29,10 +29,12 @@ TIERS = {
     3: {
         "name": "Mermaid fenced blocks",
         "keywords": [
-            "github", "markdown", "readme", "docs", "flowchart", "sequence",
+            "github", "markdown", "docs", "flowchart", "sequence",
             "state", "class", "er", "gantt", "mindmap", "pie",
             "flow", "process", "workflow", "login", "auth", "api",
             "request", "response", "pipeline", "diagram",
+            "c4", "git graph", "timeline", "quadrant", "xy chart",
+            "sankey", "priority matrix", "branching", "milestones",
         ],
         "max_nodes": 20,
     },
@@ -44,15 +46,24 @@ TIERS = {
         ],
         "max_nodes": 20,
     },
-    5: {
+    "5": {
+        "name": "Mermaid block-beta",
+        "keywords": [
+            "layered", "layers", "horizontal", "side-by-side", "stacked",
+            "block", "grid layout", "columns", "rows",
+        ],
+        "max_nodes": 20,
+    },
+    "5b": {
         "name": "Native SVG (Python)",
         "keywords": [
-            "layered", "layers", "architecture", "precise", "layout",
-            "horizontal", "side-by-side", "stacked", "exact",
+            "architecture", "precise", "layout", "exact",
             "module map", "system overview", "native svg",
             "mermaid broken", "mermaid fails", "pixel",
+            "dependency map", "grid diagram", "matrix",
+            "re-runnable", "generator", "data-driven",
         ],
-        "max_nodes": 30,
+        "max_nodes": 50,
     },
     6: {
         "name": "PlantUML",
@@ -122,7 +133,31 @@ flowchart TD
     C --> E[End]
     D --> E
 ```""",
-    5: """Write a Python script that generates native SVG:
+    "5": """```mermaid
+block-beta
+    columns 1
+
+    block:layer1["LAYER 1 — EXTERNAL"]:1
+        columns 3
+        A["Service A"] B["Service B"] C["Service C"]
+    end
+
+    space
+
+    block:layer2["LAYER 2 — INTERNAL"]:1
+        columns 2
+        D["Module D"] E["Module E"]
+    end
+
+    layer1 --> layer2
+
+    style layer1 fill:#e7f5ff,stroke:#1971c2
+    style layer2 fill:#d8f5e0,stroke:#2f9e44
+```
+
+Render: `npx -y @mermaid-js/mermaid-cli -i diagram.mmd -o diagram.svg -b transparent`""",
+    "5b": """Write a Python script that generates native SVG.
+See native-svg-guide.md for full templates (layered architecture, grid/matrix).
 
 ```python
 #!/usr/bin/env python3
@@ -140,7 +175,7 @@ def text(x, y, label, size=13, bold=False, color="#1e1e1e"):
     elements.append(f'<text x="{x}" y="{y}" font-family="Helvetica,Arial,sans-serif" font-size="{size}" font-weight="{wt}" fill="{color}" text-anchor="middle" dominant-baseline="middle">{esc(label)}</text>')
 
 # Add layers: rect() for containers, text() for labels
-# See native-svg-guide.md for the full layered template
+# See native-svg-guide.md for the full layered and grid templates
 
 W, H = 1100, 400
 svg = f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}"><rect width="{W}" height="{H}" fill="#fff"/>{"".join(elements)}</svg>'
@@ -195,7 +230,7 @@ Supported types: bytefield, wavedrom, dbml, nomnoml, pikchr, and 20+ more.""",
 }
 
 
-def recommend_tier(description: str) -> int:
+def recommend_tier(description: str):
     desc_lower = description.lower()
 
     # Score each tier by keyword matches
